@@ -19,8 +19,6 @@ parameter A = 2'b00, B = 2'b01, C = 2'b10;
 
 
 always@ (negedge clk) begin
-	if (number > 5'h14)
-		gt20 = 1'b1;
 
 	if (reset) begin
 		state3 <= number[7];
@@ -32,8 +30,11 @@ always@ (negedge clk) begin
 		n = 4'b0001;
 		prime = 1'b0;
 		not_prime = 1'b0;
+		gt20 = 1'b0;
 	end
 	else begin 
+		if (number > 5'h14)
+			gt20 = 1'b1;
 
 		num = number << n;
 		
@@ -411,8 +412,8 @@ always@ (negedge clk) begin
 
 
 
-
-		n = n+1'b1;
+		if(n <= 4'b1000)
+			n = n+1'b1;
 	end
 end
 
